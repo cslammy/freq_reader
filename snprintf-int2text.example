@@ -1,0 +1,16 @@
+ 
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+char buffer[10];
+int value = 234452;
+snprintf(buffer, 10, "%d", value);
+
+//buffer -- input string
+//10  -- base for conversion
+//%d   decimel output
+//value   input number to convert to a string.
+
+printf("buffer value is: %s \n",buffer);
+}
