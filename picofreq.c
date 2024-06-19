@@ -93,6 +93,10 @@ int main()
 {
     setupi2c();
     
+    //start OLED
+    ssd1306_t disp;  // instantiate from struct
+    disp.external_vcc=false;
+    ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
     
     const uint LED_PIN = PICO_DEFAULT_LED_PIN;
     uint ledon=0;
@@ -126,12 +130,17 @@ int main()
         freq_counter_start();
         while (!freq_counter_value_ready())
         {
+
+
         }
-       // printf("Frequency %u Hz\n", edge_counter_frequency());
         freq4oled = edge_counter_frequency();
         snprintf(freqAsString, 10, "%d", freq4oled);
         strcat(freqAsString," Hz");
-        display_write(freqAsString);
+        ssd1306_clear(&disp);
+        ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[4], freqAsString);
+        ssd1306_show(&disp);  
+        printf("Frequency %u Hz\n", edge_counter_frequency());
+
 #endif        
     }
 }
