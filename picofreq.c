@@ -127,10 +127,11 @@ int main()
         while (!freq_counter_value_ready())
         {
         }
-        printf("Frequency %u Hz\n", edge_counter_frequency());
+       // printf("Frequency %u Hz\n", edge_counter_frequency());
         freq4oled = edge_counter_frequency();
-        itoa (freq4oled, freqAsString, 10);
-        display_write("booey");
+        snprintf(freqAsString, 10, "%d", freq4oled);
+        strcat(freqAsString," Hz");
+        display_write(freqAsString);
 #endif        
     }
 }
@@ -297,7 +298,7 @@ void display_write(char *str1)
 	@param[in] s : text to draw
 */
  
-    ssd1306_clear(&disp);
+    //ssd1306_clear(&disp);
     ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[4], str1);
     ssd1306_show(&disp);  
 }
