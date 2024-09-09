@@ -93,10 +93,10 @@ int main()
 {
     setupi2c();
     
-    //start OLED
+   // start OLED
     ssd1306_t disp;  // instantiate from struct
-    disp.external_vcc=false;
-    ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
+   disp.external_vcc=false;
+   ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
     
     const uint LED_PIN = PICO_DEFAULT_LED_PIN;
     uint ledon=0;
@@ -110,7 +110,7 @@ int main()
 #else
     gate_timer_init(GATE_TIMER_PIN);
 #endif    
-    printf("PicoFreq v" VERSION "\n");
+   // printf("PicoFreq v" VERSION "\n");
     while (true) 
     {
         gpio_put(LED_PIN, (ledon = !ledon));
@@ -139,7 +139,7 @@ int main()
         ssd1306_clear(&disp);
         ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[4], freqAsString);
         ssd1306_show(&disp);  
-        printf("Frequency %u Hz\n", edge_counter_frequency());
+      //  printf("Frequency %u Hz\n", edge_counter_frequency());
 
 #endif        
     }
@@ -291,10 +291,10 @@ void display_write(char *str1)
 // send string to 1306
 
 //initialize display
-    ssd1306_t disp;  // instantiate from struct
-    disp.external_vcc=false;
-    ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
-    ssd1306_clear(&disp); //blank display
+  ssd1306_t disp;  // instantiate from struct
+  disp.external_vcc=false;
+  ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
+  ssd1306_clear(&disp); //blank display
 
 /*
 	@brief draw string with given font

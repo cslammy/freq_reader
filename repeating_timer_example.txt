@@ -1,0 +1,41 @@
+#include "pico/stdlib.h"
+//https://lorenz-ruprecht.at/docu/pico-sdk/1.4.0/html/group__repeating__timer.html#ga75dad2018ae1e4c154fb17cd96db9872
+
+
+bool led_state;
+
+//Function Called by the timer
+bool timer_callback( repeating_timer_t *rt )
+{   
+    //Blinks the LED
+    led_state = !led_state;
+    gpio_put(25, led_state);
+
+    return (true);
+}
+
+int main(){
+
+    //From what I can tell this creates an identifier for the timer
+    static repeating_timer_t timer;
+
+    stdio_init_all(); 
+    //GPIO setting (GPIO_25 is the LED pin on the pico)
+    gpio_init(25);
+    gpio_set_dir(25, GPIO_OUT);
+
+    //Sets a repeating timer to call a function every 1000 milliseconds
+    //add_repeating_timer_ms( int interval_in_milliseconds, ?&function to call?, ???, ?timer identifier? );
+    add_repeating_timer_ms( 1000, &timer_callback, NULL, &timer );
+
+    while(true){
+        //Blinks LED briefly at a different interval than the repeating timer
+        //This is to show that my code isn't blocked
+      //  gpio_put(25, !led_state);
+      //  sleep_ms(50);
+      //  gpio_put(25, led_state);
+      //  sleep_ms(450);
+    }
+
+    return 0;
+}
