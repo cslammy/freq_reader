@@ -94,7 +94,8 @@ int main()
     setupi2c();
     
    // start OLED
-    ssd1306_t disp;  // instantiate from struct
+   sleep_ms(1000);
+   ssd1306_t disp;  // instantiate from struct
    disp.external_vcc=false;
    ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
     
@@ -142,8 +143,8 @@ int main()
       //  printf("Frequency %u Hz\n", edge_counter_frequency());
 
 #endif        
-    }
-}
+    } // end while
+} //end main
 
 // Initialise gate timer, and DMA to control the counter
 void gate_timer_init(int pin)
@@ -285,18 +286,18 @@ bool ustimeout(uint *tickp, uint usec)
     }
     return (0);
 }
-
+/*
 void display_write(char *str1)
 {
 // send string to 1306
-
+ 
 //initialize display
   ssd1306_t disp;  // instantiate from struct
   disp.external_vcc=false;
   ssd1306_init(&disp, 128, 64, 0x3C, i2c1);
   ssd1306_clear(&disp); //blank display
 
-/*
+ 
 	@brief draw string with given font
 
 	@param[in] p : instance of display
@@ -305,13 +306,13 @@ void display_write(char *str1)
 	@param[in] scale : scale font to n times of original size (default should be 1)
 	@param[in] font : pointer to font
 	@param[in] s : text to draw
-*/
+ 
  
     //ssd1306_clear(&disp);
     ssd1306_draw_string_with_font(&disp, 8, 24, 2, fonts[4], str1);
     ssd1306_show(&disp);  
 }
-
+*/
 void setupi2c(void){
 //I2C Oled pins
     //pins for I2C OLED
